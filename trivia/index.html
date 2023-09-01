@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            function cor_checker(correct, element) {
+                if (correct) {
+                    document.getElementById(element).innerHTML = "Correct!";
+
+                } else {
+                    document.getElementById(element).innerHTML = "Incorrect!";
+                }
+            }
+
+
+            function answer_get() {
+                reset_btn();
+                if (event.target.id == "correct") {
+                    event.target.classList.add("Correct");
+                    cor_checker(true, "mc");
+                } else {
+                    event.target.classList.add("Incorrect");
+                    cor_checker(false, "mc");
+                }
+
+            }
+
+            function reset_btn() {
+                var bts = document.querySelectorAll(".button");
+                bts.forEach(function(bt) {
+                    bt.classList.remove("incorrect");
+                    bt.classList.remove("correct");
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function(event) {
+                var bts = document.querySelectorAll(".button");
+                bts.forEach(function(bt) {
+                    bt.addEventListener("click", answer_get);
+                });
+
+
+                answer = document.querySelector("input");
+                che_answer = document.querySelector("#check_answer");
+                che_answer.addEventListener("click", function(ev) {
+                    if (answer.value.toLowerCase() == "sari") {
+                        cor_checker(true, "free_response");
+                    } else {
+                        cor_checker(false, "free_response");
+
+                    }
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h3> Where is the capital of Iran? </h3>
+                <h2 id='mc'></h2>
+                <button class="button">Mashhad</button>
+                <button class="button">Tabriz</button>
+                <button class="button">Nowshahr</button>
+                <button id="correct" class="button">Tehran</button>
+            </div>
+
+            <div class="section">
+                <h3>Where is the capital of Mazandaran province?</h3>
+                <h2 id='free_response'></h2>
+                <input type="text">
+                <button id="check_answer" class="input">Check yout answer!</button>
+
+                <!-- TODO: Add free response question here -->
+            </div>
+        </div>
+    </body>
+
+</html>
